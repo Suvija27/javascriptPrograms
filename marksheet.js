@@ -55,6 +55,15 @@ const getResult = (marks) => Math.min(marks.tamil,marks.english,marks.maths,mark
 ? "fail"
 : "pass";
 
+const reducer=(a,b)=>b.result==="pass"
+        ?{passCount:a.passCount+1}
+        :{failCount:a.failCount+1}
+
+const getPassFailCount=(studentDetails)=>{
+    const passResult=studentDetails.reduce((a,b)=>({...a,...reducer(a,b)}),{passCount:0,failCount:0});
+    return passResult; 
+    }
+
 const addFields = (element) => ({
     ...element ,
     total: getTotal(studentMarks[element.rollNo]),
@@ -64,23 +73,24 @@ const addFields = (element) => ({
 // console.log(addFields(data.markSheets[0]));
 
 const getRank = (studentDetails) => {
-    let rank = 0;
-    const rankList = studentDetails.sort((a,b) =>  b.total - a.total);
-    const studentRank = rankList.map((element) => ({
+    
+    const rankStudents = studentDetails.map((element,index,array) => ({
         ...element,
+        rank : element.result === "pass" ? array.filter ((student) => student.total > element.total && student.result !== "fail"). length +1 : "-"
 
-        rank: element.result ==="pass"? rank+=1 : "fail"
+     }));
 
-    }));
-     return studentRank;
+     return rankStudents;
 };
 
 
 const main =() => {
     const studentDetails = (data.markSheets).map(addFields);
-    console.log(studentDetails);
+    console.log(studentDetails); 
     const output = getRank(studentDetails);
     console.log(output);
+    const passFailCount = getPassFailCount(studentDetails);
+    console.log(passFailCount);
 
 }
 main();

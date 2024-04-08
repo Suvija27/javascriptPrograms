@@ -16,7 +16,7 @@ const objArr = [
     }
 ];
 const outputArr = objArr.map((x) => x.name)
-// console.log(outputArr);
+console.log(outputArr);
 
 
 const students= [

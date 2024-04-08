@@ -15,3 +15,11 @@ const num = (value) => {
 }
 console.log(num(48));
 
+
+const nos = (value) => {
+    const divisible = value%2 ===0 && value%9;
+    return divisible;
+}
+console.log(nos(48));
+
+

@@ -1,7 +1,7 @@
 const randomNumber=(min , max) => {
-    return Math.floor(Math.random()* (max-min + 1) ) + min;
+    return Math.floor(Math.random()* (max-min) ) + min;
 }
-// console.log(randomNumber(65,122));
+console.log(randomNumber(1,3));
 
 
 const generateRandomHexCharacter = () => String.fromCharCode(randomNumber(65,122));
